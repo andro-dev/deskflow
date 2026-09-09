@@ -1,0 +1,29 @@
+{
+  "job": {
+    "title": "Senior Python SDET",
+    "company": "Lumenfield Labs",
+    "description": "Lumenfield Labs (fictional) is hiring a Senior Python SDET for internal developer tools.\n\nRequired:\n- 5+ years of software testing or backend engineering\n- Python, pytest, and API testing against REST services\n- FastAPI or similar Python web frameworks\n- GitHub Actions CI/CD and Docker\n- Comfortable reading production Python, not only writing tests\n\nNice to have:\n- Playwright\n- AWS (App Runner, ECS/Fargate, or Lambda)\n- SQL\n",
+    "required_skills": [],
+    "nice_to_have_skills": [],
+    "min_years_experience": null
+  },
+  "candidate": {
+    "name": "Jordan Lee",
+    "headline": "Manual QA specialist",
+    "summary": "Sample profile. Two years of exploratory testing for a web product. Strong written bug reports. Limited automation. Not a real person.",
+    "skills": ["manual testing", "Jira", "exploratory testing"],
+    "years_experience": 2,
+    "experience": [
+      {
+        "title": "QA analyst",
+        "organization": "Sample Retail Inc",
+        "years": 2,
+        "bullets": [
+          "Wrote reproduction steps for UI defects",
+          "Ran scripted test cases before each release"
+        ]
+      }
+    ]
+  },
+  "note_style": "screening"
+}

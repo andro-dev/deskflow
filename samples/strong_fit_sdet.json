@@ -1,0 +1,38 @@
+{
+  "job": {
+    "title": "Senior Python SDET",
+    "company": "Lumenfield Labs",
+    "description": "Lumenfield Labs (fictional) is hiring a Senior Python SDET for internal developer tools.\n\nRequired:\n- 5+ years of software testing or backend engineering\n- Python, pytest, and API testing against REST services\n- FastAPI or similar Python web frameworks\n- GitHub Actions CI/CD and Docker\n- Comfortable reading production Python, not only writing tests\n\nNice to have:\n- Playwright\n- AWS (App Runner, ECS/Fargate, or Lambda)\n- SQL\n",
+    "required_skills": [],
+    "nice_to_have_skills": [],
+    "min_years_experience": null
+  },
+  "candidate": {
+    "name": "Alex Rivera",
+    "headline": "Senior test engineer, Python automation",
+    "summary": "Sample profile. Six years writing pytest suites for Python APIs, plus Docker and GitHub Actions. Recent work includes FastAPI contract tests and a small AWS deploy checklist. Not a real person.",
+    "skills": ["Python", "pytest", "FastAPI", "Docker", "GitHub Actions", "REST", "API testing"],
+    "years_experience": 6,
+    "experience": [
+      {
+        "title": "Senior SDET",
+        "organization": "Sample Systems Co",
+        "years": 3,
+        "bullets": [
+          "Owned pytest + httpx API tests for an internal FastAPI service",
+          "Added GitHub Actions to run the suite on every pull request"
+        ]
+      },
+      {
+        "title": "QA engineer",
+        "organization": "Example Apps LLC",
+        "years": 3,
+        "bullets": [
+          "Automated regression checks with Python and Docker",
+          "Documented how to reproduce CI failures locally"
+        ]
+      }
+    ]
+  },
+  "note_style": "outreach"
+}
