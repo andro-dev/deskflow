@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}My jobs · Tekforce{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Client</p>
+  <h1>My jobs</h1>
+</header>
+<table class="quiet-table">
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Status</th>
+      <th>Slate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for job in jobs %}
+    <tr>
+      <td><a href="/me/jobs/{{ job.id }}">{{ job.title }}</a></td>
+      <td>{{ job.status }}</td>
+      <td>{% if job.slate_sent %}Ready{% else %}Waiting{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

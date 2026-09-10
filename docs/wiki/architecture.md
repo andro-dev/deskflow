@@ -124,6 +124,7 @@ When Employ/payroll exists, that is the first **extractable** service: it handle
 | `src/deskflow/app.py` | HTTP adapter; grow routes by module |
 | `samples/` | stay fictional in public repo; real data only in a private deploy |
 | Wiki (this folder) | product brain |
+| First web UI | FastAPI-served HTML/CSS click-through; see [frontend-prototype.md](frontend-prototype.md) |
 
 ## Extension examples (prove the design)
 

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}My applications · Tekforce{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Candidate</p>
+  <h1>My applications</h1>
+</header>
+{% if applications %}
+<table class="quiet-table">
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Company</th>
+      <th>Stage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in applications %}
+    <tr>
+      <td>{% if row.job %}<a href="/jobs/{{ row.job.id }}">{{ row.job.title }}</a>{% else %}—{% endif %}</td>
+      <td>{% if row.job %}{{ row.job.account }}{% else %}—{% endif %}</td>
+      <td>{{ row.stage }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty">No applications yet.</p>
+{% endif %}
+{% endblock %}

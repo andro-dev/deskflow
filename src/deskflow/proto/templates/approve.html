@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Approve · Tekforce{% endblock %}
+{% block body_class %}page-desk{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Desk</p>
+  <h1>Approve</h1>
+  <p class="lede">Client drafts wait here. Publishing puts them on Find work.</p>
+</header>
+{% if jobs %}
+<ul class="desk-list">
+  {% for job in jobs %}
+  <li>
+    <div>
+      <h2>{{ job.title }}</h2>
+      <p>{{ job.account }} · {{ job.vertical }} · {{ job.placement_type }}</p>
+      <p class="muted">{{ job.summary }}</p>
+    </div>
+    <form method="post" action="/desk/approve/{{ job.id }}">
+      <button class="door door-primary" type="submit">Approve</button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty">Nothing waiting. Draft a job as Client first.</p>
+{% endif %}
+{% endblock %}

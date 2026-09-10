@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Hire talent · Tekforce{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Clients</p>
+  <h1>Hire talent</h1>
+  <p class="lede">Draft a req. Tekforce approves it before it is public.</p>
+</header>
+<form class="stack-form" method="post" action="/hire">
+  <label>
+    <span>Title</span>
+    <input type="text" name="title" value="Revenue Cycle Manager" required>
+  </label>
+  <label>
+    <span>Practice area</span>
+    <select name="vertical">
+      {% for name in verticals %}
+      <option value="{{ name }}"{% if name == "Medical" %} selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    <span>Placement type</span>
+    <select name="placement_type">
+      {% for name in placement_types %}
+      <option value="{{ name }}"{% if name == "Contract-to-hire" %} selected{% endif %}>{{ name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    <span>Description</span>
+    <textarea name="description" rows="5">Fictional hire request for the prototype. Hospital system needs a revenue-cycle lead. Not a real opening.</textarea>
+  </label>
+  <button class="door door-primary" type="submit">Submit draft</button>
+</form>
+{% endblock %}

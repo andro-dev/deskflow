@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} · Tekforce{% endblock %}
+{% block main %}
+<article class="job-detail">
+  <p class="eyebrow">{{ job.account }}</p>
+  <h1>{{ job.title }}</h1>
+  <p class="meta">{{ job.vertical }} · {{ job.placement_type }} · {{ job.location }}</p>
+  <p class="body-copy">{{ job.description }}</p>
+  <p class="actions">
+    <a class="door door-primary" href="/jobs/{{ job.id }}/apply">Apply</a>
+    <a class="text-link" href="/jobs">All jobs</a>
+  </p>
+</article>
+{% endblock %}

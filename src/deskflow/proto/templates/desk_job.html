@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} · Desk{% endblock %}
+{% block body_class %}page-desk{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">{{ job.account }} · {{ job.status }}</p>
+  <h1>{{ job.title }}</h1>
+  <p class="lede">{{ job.vertical }} · {{ job.placement_type }}. Fit scores are static samples, not a live evaluate call.</p>
+</header>
+
+{% if applications %}
+<form method="post" action="/desk/jobs/{{ job.id }}/slate">
+  <table class="quiet-table">
+    <thead>
+      <tr>
+        <th>Slate</th>
+        <th>Name</th>
+        <th>Stage</th>
+        <th>Fit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in applications %}
+      <tr>
+        <td>
+          <input type="checkbox" name="application_id" value="{{ row.id }}" id="pick-{{ row.id }}"
+            {% if row.id in job.slate_application_ids or (not job.slate_sent and row.recommendation == "strong_fit") %}checked{% endif %}>
+        </td>
+        <td><label for="pick-{{ row.id }}">{{ row.candidate_name }}</label><br><span class="muted">{{ row.headline }}</span></td>
+        <td>{{ row.stage }}</td>
+        <td>{% if row.fit_score is not none %}{{ row.fit_score }} · {{ row.recommendation }}{% else %}—{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="actions">
+    <button class="door door-primary" type="submit">Send slate</button>
+    <a class="text-link" href="/desk/jobs">All desk jobs</a>
+  </p>
+</form>
+{% else %}
+<p class="empty">No candidates on this job yet.</p>
+{% endif %}
+{% endblock %}

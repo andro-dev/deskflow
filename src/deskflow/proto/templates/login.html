@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Log in · My Tekforce{% endblock %}
+{% block body_class %}page-account{% endblock %}
+{% block main %}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="/">Home</a>
+  <span aria-hidden="true">/</span>
+  <a href="/my-tekforce/login">My Tekforce</a>
+  <span aria-hidden="true">/</span>
+  <span>Log in</span>
+</nav>
+
+<header class="page-head">
+  <p class="eyebrow">My Tekforce</p>
+  <h1>Log in</h1>
+  <p class="lede">Applications, jobs, and the desk. Sample accounts only — no password is checked.</p>
+</header>
+
+<form class="stack-form" method="post" action="/my-tekforce/login">
+  <label>
+    <span>Email</span>
+    <input type="email" name="email" autocomplete="username" required placeholder="alex.rivera@example.com">
+  </label>
+  <label>
+    <span>Password</span>
+    <input type="password" name="password" autocomplete="current-password" value="sample" required>
+  </label>
+  <label class="check">
+    <input type="checkbox" name="remember" value="1">
+    <span>Remember me <em>(optional)</em></span>
+  </label>
+  <button class="door door-primary" type="submit">Log in</button>
+</form>
+
+<p class="account-links">
+  <a href="/my-tekforce/forgot">Forgot password</a>
+  <span aria-hidden="true">·</span>
+  New to Tekforce? <a href="/my-tekforce/register">Register</a>
+</p>
+
+<section class="sample-accounts" aria-label="Sample accounts">
+  <h2 class="subhead">Sample accounts</h2>
+  <p class="muted">Click one. Fiction only.</p>
+  <ul>
+    {% for row in accounts %}
+    <li>
+      <form method="post" action="/my-tekforce/login">
+        <input type="hidden" name="email" value="{{ row.email }}">
+        <input type="hidden" name="password" value="sample">
+        <button type="submit">{{ row.label }}</button>
+        <span>{{ row.email }}</span>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

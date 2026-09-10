@@ -4,11 +4,13 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from deskflow import __version__
 from deskflow.config import get_settings
 from deskflow.models import EvaluateRequest, EvaluateResponse, HealthResponse
 from deskflow.pipeline import evaluate
+from deskflow.proto.router import router as proto_router
 
 SAMPLES_DIR = Path(__file__).resolve().parents[2] / "samples"
 
@@ -18,8 +20,16 @@ app = FastAPI(
     description=(
         "Staffing-desk assistant. POST a job description and a SAMPLE candidate "
         "profile; receive a fit score, evidence bullets, and a draft note. "
-        "Do not submit real resumes, personal data, or employer contacts."
+        "Do not submit real resumes, personal data, or employer contacts. "
+        "GET / is a clickable Tekforce prototype (sample data only)."
     ),
+)
+
+app.include_router(proto_router)
+app.mount(
+    "/proto/static",
+    StaticFiles(directory=Path(__file__).resolve().parent / "proto" / "static"),
+    name="proto_static",
 )
 
 

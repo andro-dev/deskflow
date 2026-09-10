@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Tekforce{% endblock %}
+{% block body_class %}page-home{% endblock %}
+{% block main %}
+<section class="hero">
+  <p class="eyebrow">Recruiting and staff augmentation</p>
+  <h1>Hire talent.<br>Find work.</h1>
+  <p class="lede">A quiet desk between companies and people. Two doors. You stay in the middle.</p>
+  <div class="doors">
+    <a class="door door-primary" href="/hire">Hire talent</a>
+    <a class="door door-secondary" href="/jobs">Find work</a>
+  </div>
+</section>
+
+<section class="specialties" aria-label="Practice areas">
+  <p class="eyebrow">Practice areas</p>
+  <ul>
+    {% for name in verticals %}
+    <li>{{ name }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="walk">
+  <h2>Walk the loop</h2>
+  <ol>
+    <li><span>View as Client</span> draft a job</li>
+    <li><span>View as Exec</span> approve it</li>
+    <li><span>View as Candidate</span> apply</li>
+    <li><span>View as Recruiter</span> send a slate</li>
+    <li><span>View as Client</span> open My jobs</li>
+  </ol>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Desk · Tekforce{% endblock %}
+{% block body_class %}page-desk{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Desk</p>
+  <h1>Jobs</h1>
+</header>
+<table class="quiet-table">
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Client</th>
+      <th>Status</th>
+      <th>Slate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for job in jobs %}
+    <tr>
+      <td><a href="/desk/jobs/{{ job.id }}">{{ job.title }}</a></td>
+      <td>{{ job.account }}</td>
+      <td>{{ job.status }}</td>
+      <td>{% if job.slate_sent %}Sent{% else %}—{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

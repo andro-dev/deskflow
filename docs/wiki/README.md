@@ -11,6 +11,7 @@ This wiki is the source of truth for **what we are building** and **ideas we mig
 * [What we locked](#what-we-locked)
 * [Wiki pages](#wiki-pages)
     * [Product](#product)
+    * [Frontend](#frontend)
     * [Ideas from other companies](#ideas-from-other-companies)
     * [Architecture](#architecture)
     * [Tools](#tools)
@@ -19,6 +20,7 @@ This wiki is the source of truth for **what we are building** and **ideas we mig
 ## What we locked
 
 * Public site like a **simplified Robert Half**: two doors (find a job / hire talent) **and logins**.
+* First UI: [clickable prototype](frontend-prototype.md) for Andrew — full loop, Apple + Toptal look, FastAPI HTML/CSS, **View as** (no login). **Mobile later.**
 * Candidates apply and track applications. Clients draft jobs and see slates.
 * **You approve** a client job before it is public.
 * Verticals and placement types are **data/config**, not code (IT, CEO Search, medical, financial, legal, trades, …; contract, CTH, permanent, executive search).
@@ -35,6 +37,11 @@ Full write-up: [product-brief.md](product-brief.md).
 * [Product brief](product-brief.md)
 * [Roles and permissions](roles-and-permissions.md)
 
+### Frontend
+
+* [Frontend prototype](frontend-prototype.md) — clickable full loop; Apple + Toptal; mobile later
+* [Design references](ideas/design-references.md) — Apple, Toptal, Tesla (watch)
+
 ### Ideas from other companies
 
 Track what they do, what we might adopt, and what we will not copy. Status on each idea: `watch` | `later` | `v1` | `never`.
@@ -45,6 +52,7 @@ Track what they do, what we might adopt, and what we will not copy. Status on ea
 * [FDM Group](ideas/fdm-group.md) — train, then deploy talent to clients
 * [Bullhorn](ideas/bullhorn.md) — staffing ATS + CRM (+ middle office later)
 * [Michael Page](ideas/michael-page.md) — perm / temp / executive / RPO-scale
+* [Design references](ideas/design-references.md) — Apple / Toptal look; Randstad My Tekforce; Tesla watched
 * [Backlog](ideas/backlog.md) — adopt / later / never
 
 ### Architecture

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Apply · {{ job.title }}{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">{{ job.account }}</p>
+  <h1>Apply</h1>
+  <p class="lede">{{ job.title }}. Prefills the sample candidate. Nothing is stored for real.</p>
+</header>
+<form class="stack-form" method="post" action="/jobs/{{ job.id }}/apply">
+  <label>
+    <span>Name</span>
+    <input type="text" name="name" value="Alex Rivera" required>
+  </label>
+  <label>
+    <span>Headline</span>
+    <input type="text" name="headline" value="Senior test engineer, Python automation">
+  </label>
+  <button class="door door-primary" type="submit">Submit application</button>
+</form>
+{% endblock %}

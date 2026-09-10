@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} · My jobs{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">{{ job.account }} · {{ job.status }}</p>
+  <h1>{{ job.title }}</h1>
+  <p class="lede">{{ job.vertical }} · {{ job.placement_type }}</p>
+</header>
+
+{% if slate %}
+<h2 class="subhead">Slate</h2>
+<ul class="slate-list">
+  {% for row in slate %}
+  <li>
+    <h3>{{ row.candidate_name }}</h3>
+    <p>{{ row.headline }}</p>
+    <p class="muted">{% if row.fit_score is not none %}Fit {{ row.fit_score }} · {{ row.recommendation }}{% else %}Submitted{% endif %}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% elif job.status == "pending" %}
+<p class="empty">This draft is waiting for Tekforce approval.</p>
+{% else %}
+<p class="empty">No slate yet. A recruiter will send people here.</p>
+{% endif %}
+<p class="actions"><a class="text-link" href="/me/jobs">All my jobs</a></p>
+{% endblock %}

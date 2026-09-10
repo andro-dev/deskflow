@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}My Tekforce{% endblock %}
+{% block body_class %}page-account{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Signed in · {{ persona }}</p>
+  <h1>My Tekforce</h1>
+  <p class="lede">Your door into applications, jobs, or the desk. Sample session only.</p>
+</header>
+
+<p class="actions">
+  <a class="door door-primary" href="{{ home }}">Continue</a>
+  {% if persona == "candidate" %}
+  <a class="door door-secondary" href="/applications">My applications</a>
+  {% elif persona == "client" %}
+  <a class="door door-secondary" href="/me/jobs">My jobs</a>
+  {% else %}
+  <a class="door door-secondary" href="/desk/jobs">Desk</a>
+  {% endif %}
+</p>
+
+<form class="sign-out" method="post" action="/my-tekforce/logout">
+  <button type="submit" class="text-link">Sign out</button>
+</form>
+{% endblock %}

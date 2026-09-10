@@ -67,6 +67,7 @@ Layout:
 | `samples/` | Fictional payloads only |
 | `docs/aws-deploy.md` | App Runner from ECR |
 | `docs/playbook.md` | How this repo is built with agents |
+| `src/deskflow/proto/` | Clickable Tekforce HTML prototype (`GET /`) |
 | `docs/wiki/` | **Product wiki:** Tekforce brief, competitor ideas, architecture, tools evaluation |
 | `AGENTS.md` | What an agent may and may not do here |
 
@@ -87,6 +88,8 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 uvicorn deskflow.app:app --reload --port 8080
 ```
+
+Open the clickable Tekforce prototype: [http://127.0.0.1:8080/](http://127.0.0.1:8080/) (sample data, View as, My Tekforce login).
 
 Health check: `GET http://127.0.0.1:8080/health`
 

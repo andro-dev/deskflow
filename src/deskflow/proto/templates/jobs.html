@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Jobs · Tekforce{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Open roles</p>
+  <h1>Find work</h1>
+  <p class="lede">Public board. Sample roles only.</p>
+</header>
+{% if jobs %}
+<ul class="job-list">
+  {% for job in jobs %}
+  <li>
+    <a href="/jobs/{{ job.id }}">
+      <h2>{{ job.title }}</h2>
+      <p>{{ job.account }} · {{ job.vertical }} · {{ job.placement_type }}</p>
+      <p class="muted">{{ job.summary }}</p>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="empty">Nothing public yet. Approve a client draft first.</p>
+{% endif %}
+{% endblock %}

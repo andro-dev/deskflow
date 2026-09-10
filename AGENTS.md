@@ -6,7 +6,7 @@ This repository is a **public staffing-desk proof**. Work as if a hiring manager
 
 - Ship a small FastAPI service: job + **sample** candidate in, fit score / evidence / draft note out.
 - Keep Python. Do not rewrite the service in Java, TypeScript, or a second framework.
-- Product **vision** (ATS + CRM, Tekforce, competitor ideas) lives in `docs/wiki/`. Do not implement that vision unless a human explicitly asks. The running service stays the evaluate MVP until then.
+- Product **vision** (ATS + CRM, Tekforce, competitor ideas) lives in `docs/wiki/`. A clickable HTML prototype is in `src/deskflow/proto/` (`GET /`). Do not add real login, Postgres, or a second language unless a human asks. The evaluate API stays the scoring MVP.
 - Do not add Kubernetes unless a human explicitly asks.
 
 ## Data you must refuse

@@ -7,12 +7,14 @@ import pytest
 from fastapi.testclient import TestClient
 
 from deskflow.app import app
+from deskflow.proto import store
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.fixture
 def client() -> TestClient:
+    store.reset()
     return TestClient(app)
 
 

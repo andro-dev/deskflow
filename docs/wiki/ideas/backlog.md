@@ -5,6 +5,7 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 ## v1
 
 * Two-door public site + logins (Robert Half)
+* Clickable frontend prototype: Apple + Toptal look, full loop, View as (see [frontend-prototype.md](../frontend-prototype.md))
 * Configurable verticals and placement types
 * Client draft → internal approve → publish
 * ATS + CRM, three-way Account / Job / Candidate (Bullhorn-shaped)
@@ -22,12 +23,13 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 * Executive interim, assessment, RPO/MSP
 * Salary/content marketing
 * Multi-tenant if we ever sell the software
+* **Mobile / responsive** layouts for the public site and portals
 
 ## watch
 
 * RemotePeople “shortlist in 72 hours” as an operating SLA
 * FDM Careers vs Clients site split
-* Bullhorn-style in-app assistant (only after data is ours and private)
+* Tesla-style full-bleed homepage (cinematic panels) — watched; not this prototype
 
 ## never (unless strategy changes)
 
