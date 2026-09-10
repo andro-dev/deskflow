@@ -12,6 +12,7 @@ Visual language for the [frontend prototype](../frontend-prototype.md). Not staf
 
 * Dark slate header, **Work Sans**, green filled CTAs, orange hairline under the hero
 * Dropdown menus: Find a Job, Hire talent, Desk (staff)
+* Find a Job mega is **full width** with a blurred page behind it; left column is verticals, hover shows hardcoded specialties that link to `/jobs?q=`
 * Account icon: Sign in / Sign up; signed-in name under My Tekforce
 * Home: full-bleed dark hero, two doors, search-jobs card, practice areas
 * Login/register: same type and green Sign in; sample accounts in Dev/Test; social buttons visible and inactive

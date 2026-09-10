@@ -14,6 +14,16 @@ from deskflow.db.seed import PLACEMENT_NAMES, VERTICAL_NAMES, sample_accounts
 
 ROLES = ("visitor", "candidate", "client", "recruiter", "exec", "admin")
 
+# Hardcoded until specialties are catalog rows. Used by the Find a Job mega menu.
+VERTICAL_SPECIALTIES: dict[str, tuple[str, ...]] = {
+    "IT": ("Software", "Cloud", "Cybersecurity", "Data", "QA / SDET"),
+    "CEO Search": ("CEO", "CFO", "COO", "Board"),
+    "Medical": ("Nursing", "Revenue cycle", "Allied health", "Clinical leadership"),
+    "Financial": ("Accounting", "FP&A", "Audit", "Controller"),
+    "Legal": ("Corporate counsel", "Compliance", "Paralegal"),
+    "Skilled trades": ("Electrician", "HVAC", "Welding", "Facilities"),
+}
+
 HOME_AFTER_LOGIN: dict[str, str] = {
     "candidate": "/applications",
     "client": "/me/jobs",
@@ -71,6 +81,10 @@ def PLACEMENT_TYPES() -> tuple[str, ...]:
         return tuple(row.name for row in rows) or PLACEMENT_NAMES
     finally:
         db.close()
+
+
+def nav_specialties() -> dict[str, tuple[str, ...]]:
+    return {name: VERTICAL_SPECIALTIES.get(name, ()) for name in VERTICALS()}
 
 
 def account_for_email(email: str) -> dict[str, str] | None:
@@ -152,14 +166,23 @@ def public_jobs(query: str = "") -> list[dict[str, Any]]:
     needle = query.strip().lower()
     if not needle:
         return rows
-    return [
-        job
-        for job in rows
-        if needle in job["title"].lower()
-        or needle in job["summary"].lower()
-        or needle in job["vertical"].lower()
-        or needle in job["account"].lower()
-    ]
+    tokens = [token for token in needle.replace("/", " ").split() if len(token) > 1]
+
+    def matches(job: dict[str, Any]) -> bool:
+        hay = " ".join(
+            (
+                job["title"],
+                job["summary"],
+                job["vertical"],
+                job["account"],
+                job["placement_type"],
+            )
+        ).lower()
+        if needle in hay:
+            return True
+        return any(token in hay for token in tokens)
+
+    return [job for job in rows if matches(job)]
 
 
 def pending_jobs() -> list[dict[str, Any]]:

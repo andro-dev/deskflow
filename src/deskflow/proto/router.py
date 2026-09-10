@@ -55,6 +55,7 @@ def _ctx(request: Request, **extra: object) -> dict[str, object]:
         "signed_in_name": account["name"] if account else "",
         "verticals": store.VERTICALS(),
         "placement_types": store.PLACEMENT_TYPES(),
+        "vertical_specialties": store.nav_specialties(),
         "show_desk_nav": persona in STAFF_ROLES,
         "can_assign_roles": persona in {"exec", "admin"},
         "signed_in_home": store.HOME_AFTER_LOGIN.get(persona, "/"),

@@ -43,7 +43,7 @@ Verticals and placement types are catalog **rows**. Sample names only (same poli
 
 ## Look
 
-* **Public:** Motion Recruitment structure — slate header, Work Sans, green CTAs, Find a Job / Hire talent dropdowns, dark hero, search card. Tekforce wordmark only; no Motion photography or logo.
+* **Public:** Motion Recruitment structure — slate header, Work Sans, green CTAs, full-width Find a Job mega (verticals + hardcoded specialties, blurred page behind), dark hero, search card. Tekforce wordmark only; no Motion photography or logo.
 * **My Tekforce:** same chrome; account icon; signed-in name under My Tekforce; green Sign in; inactive Google/Facebook/LinkedIn. Sample logins when `DESKFLOW_ENV` is `dev` or `test`.
 * **Desk (approve / slate):** same header (Desk dropdown for staff), quieter tables. Not a marketing hero.
 

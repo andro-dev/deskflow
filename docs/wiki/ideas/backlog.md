@@ -25,6 +25,7 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 * Salary/content marketing
 * Multi-tenant if we ever sell the software
 * **Mobile / responsive** layouts for the public site and portals
+* **JSON templates** for UI layout, fonts, and chrome (instead of hardcoded CSS)
 
 ## watch
 

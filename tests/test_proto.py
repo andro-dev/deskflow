@@ -23,7 +23,7 @@ def test_job_board_lists_public_sample_role(client: TestClient) -> None:
     response = client.get("/jobs")
     assert response.status_code == 200
     assert "Senior Python SDET" in response.text
-    assert "Controller" not in response.text
+    assert 'href="/jobs/controller"' not in response.text
 
 
 def test_pending_job_is_not_on_public_detail(client: TestClient) -> None:
@@ -93,6 +93,11 @@ def test_header_has_my_tekforce_link(client: TestClient) -> None:
     assert "Find a Job" in response.text
     assert "Hire talent" in response.text
     assert 'class="account-name"' not in response.text
+    assert 'class="mega"' in response.text
+    assert "QA / SDET" in response.text
+    assert "Cybersecurity" in response.text
+    assert "/jobs?q=" in response.text
+    assert "nav-scrim" in response.text
 
 
 def test_staff_header_has_desk_dropdown(client: TestClient) -> None:
