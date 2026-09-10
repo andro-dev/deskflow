@@ -4,6 +4,8 @@ Staffing-desk assistant: score a **sample** candidate against a job description 
 
 This is a small public proof service. It is not a production ATS, not a resume database, and not a place for real people or real employer contacts.
 
+**Where this is going:** Tekforce LLC will grow this into a staffing eBusiness (public two-door site, ATS + CRM, configurable verticals). The product wiki is [`docs/wiki/`](docs/wiki/README.md) — brief, competitor ideas, target architecture, and [tools evaluation](docs/wiki/tools/README.md). The running code is still this evaluate API until a slice is explicitly built.
+
 ## What it does
 
 `POST /v1/evaluate` accepts:
@@ -65,6 +67,7 @@ Layout:
 | `samples/` | Fictional payloads only |
 | `docs/aws-deploy.md` | App Runner from ECR |
 | `docs/playbook.md` | How this repo is built with agents |
+| `docs/wiki/` | **Product wiki:** Tekforce brief, competitor ideas, architecture, tools evaluation |
 | `AGENTS.md` | What an agent may and may not do here |
 
 ## Sample data policy

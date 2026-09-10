@@ -6,7 +6,8 @@ This repository is a **public staffing-desk proof**. Work as if a hiring manager
 
 - Ship a small FastAPI service: job + **sample** candidate in, fit score / evidence / draft note out.
 - Keep Python. Do not rewrite the service in Java, TypeScript, or a second framework.
-- Do not add an ATS, user accounts, a database, or Kubernetes unless a human explicitly expands the MVP.
+- Product **vision** (ATS + CRM, Tekforce, competitor ideas) lives in `docs/wiki/`. Do not implement that vision unless a human explicitly asks. The running service stays the evaluate MVP until then.
+- Do not add Kubernetes unless a human explicitly asks.
 
 ## Data you must refuse
 

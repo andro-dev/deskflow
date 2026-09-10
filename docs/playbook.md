@@ -39,7 +39,7 @@ That split is intentional. It is testable, it works offline, and it is the answe
 | Pushing to origin or skipping hooks | Humans decide when history leaves the machine. |
 | A fake AWS URL | If credentials are missing, document App Runner steps; do not invent a hostname. |
 | Unbounded LLM scoring | A demo that needs a paid key is not an MVP. |
-| Expanding into an ATS / Kubernetes / a second language | Scope kill. The MVP is one API and tests. |
+| Implementing the wiki (ATS/CRM) or Kubernetes / a second language | Product vision is `docs/wiki/`. Do not build it unless a human asks. The running MVP is still one API and tests. |
 | Deleting or weakening tests to go green | The SDET artifact is `tests/test_api.py`. Protect it. |
 | Committing `.env` or cloud keys | Local Docker and pytest must work without secrets. |
 
