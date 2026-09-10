@@ -5,7 +5,8 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 ## v1
 
 * Two-door public site + logins (Robert Half)
-* Clickable frontend prototype: Apple + Toptal look, full loop, View as (see [frontend-prototype.md](../frontend-prototype.md))
+* Clickable frontend prototype: Motion Recruitment look, full loop, View as + My Tekforce (see [frontend-prototype.md](../frontend-prototype.md))
+* SQLite identity: users, roles, user_roles; Exec/Admin assign roles; catalog + jobs persist
 * Configurable verticals and placement types
 * Client draft → internal approve → publish
 * ATS + CRM, three-way Account / Job / Candidate (Bullhorn-shaped)

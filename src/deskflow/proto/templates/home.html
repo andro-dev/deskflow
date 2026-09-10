@@ -3,12 +3,26 @@
 {% block body_class %}page-home{% endblock %}
 {% block main %}
 <section class="hero">
-  <p class="eyebrow">Recruiting and staff augmentation</p>
-  <h1>Hire talent.<br>Find work.</h1>
-  <p class="lede">A quiet desk between companies and people. Two doors. You stay in the middle.</p>
-  <div class="doors">
-    <a class="door door-primary" href="/hire">Hire talent</a>
-    <a class="door door-secondary" href="/jobs">Find work</a>
+  <div class="hero-copy">
+    <p class="hero-kicker">Recruiting and staff augmentation</p>
+    <h1>Hire talent.<br>Find work.</h1>
+    <hr class="hero-rule">
+    <p class="lede">A desk between companies and people. Two doors. You stay in the middle.</p>
+    <div class="doors">
+      <a class="door door-primary" href="/jobs">Find a job</a>
+      <a class="door door-secondary" href="/hire">Hire talent</a>
+    </div>
+  </div>
+  <div class="hero-panel" aria-hidden="true"></div>
+</section>
+
+<section class="search-band">
+  <div class="search-card">
+    <h2>Search jobs</h2>
+    <form method="get" action="/jobs">
+      <input type="search" name="q" placeholder="What job are you looking for?" aria-label="Search jobs">
+      <button class="door door-primary" type="submit">Search jobs</button>
+    </form>
   </div>
 </section>
 
@@ -16,7 +30,7 @@
   <p class="eyebrow">Practice areas</p>
   <ul>
     {% for name in verticals %}
-    <li>{{ name }}</li>
+    <li><a href="/jobs?q={{ name|urlencode }}">{{ name }}</a></li>
     {% endfor %}
   </ul>
 </section>

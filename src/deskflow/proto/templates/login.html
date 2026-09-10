@@ -1,57 +1,83 @@
 {% extends "base.html" %}
 {% block title %}Log in · My Tekforce{% endblock %}
-{% block body_class %}page-account{% endblock %}
+{% block body_class %}page-auth{% endblock %}
 {% block main %}
-<nav class="crumbs" aria-label="Breadcrumb">
-  <a href="/">Home</a>
-  <span aria-hidden="true">/</span>
-  <a href="/my-tekforce/login">My Tekforce</a>
-  <span aria-hidden="true">/</span>
-  <span>Log in</span>
-</nav>
+<section class="auth-card" aria-labelledby="auth-title">
+  <a class="auth-close" href="/" aria-label="Close">×</a>
+  <a class="auth-brand" href="/">Tekforce</a>
+  <h1 id="auth-title" class="visually-hidden">Log in</h1>
 
-<header class="page-head">
-  <p class="eyebrow">My Tekforce</p>
-  <h1>Log in</h1>
-  <p class="lede">Applications, jobs, and the desk. Sample accounts only — no password is checked.</p>
-</header>
+  <form class="auth-form" method="post" action="/my-tekforce/login">
+    <label class="auth-field">
+      <span class="visually-hidden">Email Address</span>
+      <input type="email" name="email" autocomplete="username" required placeholder="Email Address">
+    </label>
+    <label class="auth-field auth-field-password">
+      <span class="visually-hidden">Password</span>
+      <input id="login-password" type="password" name="password" autocomplete="current-password" value="sample" required placeholder="Password">
+      <button type="button" class="auth-toggle-pw" data-toggle-password="#login-password" aria-label="Show password">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M12 5c-5 0-9.27 3.11-11 7 1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2.5A2.5 2.5 0 1 0 12 9a2.5 2.5 0 0 0 0 5z"/>
+        </svg>
+      </button>
+    </label>
+    <div class="auth-row">
+      <label class="check">
+        <input type="checkbox" name="remember" value="1">
+        <span>Keep me signed in</span>
+      </label>
+      <a class="auth-forgot" href="/my-tekforce/forgot">Forgot your password?</a>
+    </div>
+    <button class="door door-primary auth-submit" type="submit">Sign in</button>
+  </form>
 
-<form class="stack-form" method="post" action="/my-tekforce/login">
-  <label>
-    <span>Email</span>
-    <input type="email" name="email" autocomplete="username" required placeholder="alex.rivera@example.com">
-  </label>
-  <label>
-    <span>Password</span>
-    <input type="password" name="password" autocomplete="current-password" value="sample" required>
-  </label>
-  <label class="check">
-    <input type="checkbox" name="remember" value="1">
-    <span>Remember me <em>(optional)</em></span>
-  </label>
-  <button class="door door-primary" type="submit">Log in</button>
-</form>
+  <p class="auth-signup">Don’t have an account? <a href="/my-tekforce/register">Sign up now</a></p>
 
-<p class="account-links">
-  <a href="/my-tekforce/forgot">Forgot password</a>
-  <span aria-hidden="true">·</span>
-  New to Tekforce? <a href="/my-tekforce/register">Register</a>
-</p>
+  <p class="auth-or" role="separator"><span>or</span></p>
 
-<section class="sample-accounts" aria-label="Sample accounts">
-  <h2 class="subhead">Sample accounts</h2>
-  <p class="muted">Click one. Fiction only.</p>
-  <ul>
-    {% for row in accounts %}
-    <li>
-      <form method="post" action="/my-tekforce/login">
-        <input type="hidden" name="email" value="{{ row.email }}">
-        <input type="hidden" name="password" value="sample">
-        <button type="submit">{{ row.label }}</button>
-        <span>{{ row.email }}</span>
-      </form>
-    </li>
-    {% endfor %}
-  </ul>
+  <div class="auth-social" aria-label="Social sign-in (not in this prototype)">
+    <button type="button" class="social-btn" disabled title="Not in this prototype">
+      <span class="social-mark" aria-hidden="true">G</span>
+      Sign in / Sign up with Google
+    </button>
+    <button type="button" class="social-btn" disabled title="Not in this prototype">
+      <span class="social-mark" aria-hidden="true">f</span>
+      Sign in / Sign up with Facebook
+    </button>
+    <button type="button" class="social-btn" disabled title="Not in this prototype">
+      <span class="social-mark" aria-hidden="true">in</span>
+      Sign in / Sign up with LinkedIn
+    </button>
+  </div>
+
+  {% if show_sample_logins and accounts %}
+  <section class="sample-accounts" aria-label="Sample accounts">
+    <h2>Sample accounts</h2>
+    <p class="muted">Dev / Test only. Demo password is “sample”.</p>
+    <ul>
+      {% for row in accounts %}
+      <li>
+        <form method="post" action="/my-tekforce/login">
+          <input type="hidden" name="email" value="{{ row.email }}">
+          <input type="hidden" name="password" value="sample">
+          <button type="submit">{{ row.label }}</button>
+          <span>{{ row.email }}</span>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
 </section>
+<script>
+  document.querySelectorAll("[data-toggle-password]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = document.querySelector(btn.getAttribute("data-toggle-password"));
+      if (!input) return;
+      const hide = input.type === "text";
+      input.type = hide ? "password" : "text";
+      btn.setAttribute("aria-label", hide ? "Show password" : "Hide password");
+    });
+  });
+</script>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Users · Desk{% endblock %}
+{% block body_class %}page-desk{% endblock %}
+{% block main %}
+<header class="page-head">
+  <p class="eyebrow">Desk</p>
+  <h1>Users</h1>
+  <p class="lede">Assign roles. Sample accounts; demo password is “sample”.</p>
+</header>
+{% for user in users %}
+<section class="user-card">
+  <h2>{{ user.name }}</h2>
+  <p class="muted">{{ user.email }}</p>
+  <form method="post" action="/desk/users/{{ user.id }}">
+    <fieldset>
+      <legend>Roles</legend>
+      {% for role in role_rows %}
+      <label class="check">
+        <input type="checkbox" name="role" value="{{ role.code }}"
+          {% if role.code in user.roles %}checked{% endif %}>
+        <span>{{ role.label }}</span>
+      </label>
+      {% endfor %}
+    </fieldset>
+    <button class="door door-primary" type="submit">Save roles</button>
+  </form>
+</section>
+{% endfor %}
+{% endblock %}

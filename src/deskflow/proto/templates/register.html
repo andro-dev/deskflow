@@ -1,31 +1,55 @@
 {% extends "base.html" %}
-{% block title %}Register · My Tekforce{% endblock %}
-{% block body_class %}page-account{% endblock %}
+{% block title %}Create an account · My Tekforce{% endblock %}
+{% block body_class %}page-auth{% endblock %}
 {% block main %}
-<nav class="crumbs" aria-label="Breadcrumb">
-  <a href="/">Home</a>
-  <span aria-hidden="true">/</span>
-  <a href="/my-tekforce/login">My Tekforce</a>
-  <span aria-hidden="true">/</span>
-  <span>Register</span>
-</nav>
+<section class="auth-card" aria-labelledby="auth-title">
+  <a class="auth-close" href="/" aria-label="Close">×</a>
+  <a class="auth-brand" href="/">Tekforce</a>
+  <h1 id="auth-title">Create an Account</h1>
 
-<header class="page-head">
-  <p class="eyebrow">My Tekforce</p>
-  <h1>Register</h1>
-  <p class="lede">Prototype only. This sets View as. It does not create a real account.</p>
-</header>
+  <form class="auth-form" method="post" action="/my-tekforce/register">
+    <label class="auth-field">
+      <span class="visually-hidden">Email Address</span>
+      <input type="email" name="email" autocomplete="email" required placeholder="Email Address">
+    </label>
+    <label class="auth-field auth-field-password">
+      <span class="visually-hidden">New Password</span>
+      <input id="register-password" type="password" name="password" autocomplete="new-password" value="sample" required placeholder="New Password">
+      <button type="button" class="auth-toggle-pw" data-toggle-password="#register-password" aria-label="Show password">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M12 5c-5 0-9.27 3.11-11 7 1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2.5A2.5 2.5 0 1 0 12 9a2.5 2.5 0 0 0 0 5z"/>
+        </svg>
+      </button>
+    </label>
+    <label class="auth-field">
+      <span class="visually-hidden">First Name</span>
+      <input type="text" name="first_name" autocomplete="given-name" required placeholder="First Name">
+    </label>
+    <label class="auth-field">
+      <span class="visually-hidden">Last Name</span>
+      <input type="text" name="last_name" autocomplete="family-name" required placeholder="Last Name">
+    </label>
+    <label class="auth-field">
+      <span class="visually-hidden">I am</span>
+      <select name="role" required>
+        <option value="candidate">I am a candidate</option>
+        <option value="client">I am a client</option>
+      </select>
+    </label>
+    <button class="door door-primary auth-submit" type="submit">Create account</button>
+  </form>
 
-<form class="stack-form" method="post" action="/my-tekforce/register">
-  <label>
-    <span>I am</span>
-    <select name="role">
-      <option value="candidate">A candidate</option>
-      <option value="client">A client</option>
-    </select>
-  </label>
-  <button class="door door-primary" type="submit">Continue</button>
-</form>
-
-<p class="account-links">Already have a sample login? <a href="/my-tekforce/login">Log in</a></p>
+  <p class="auth-signup">Already have an account? <a href="/my-tekforce/login">Log in</a></p>
+</section>
+<script>
+  document.querySelectorAll("[data-toggle-password]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const input = document.querySelector(btn.getAttribute("data-toggle-password"));
+      if (!input) return;
+      const hide = input.type === "text";
+      input.type = hide ? "password" : "text";
+      btn.setAttribute("aria-label", hide ? "Show password" : "Hide password");
+    });
+  });
+</script>
 {% endblock %}

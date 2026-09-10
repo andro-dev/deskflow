@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import pytest
 from fastapi.testclient import TestClient
 
 from deskflow.proto import store
@@ -89,22 +90,66 @@ def test_header_has_my_tekforce_link(client: TestClient) -> None:
     response = client.get("/")
     assert "My Tekforce" in response.text
     assert "/my-tekforce/login" in response.text
+    assert "Find a Job" in response.text
+    assert "Hire talent" in response.text
+    assert 'class="account-name"' not in response.text
+
+
+def test_staff_header_has_desk_dropdown(client: TestClient) -> None:
+    client.post("/view", data={"as": "exec", "next": "/"})
+    body = client.get("/").text
+    assert "/desk/approve" in body
+    assert "/desk/jobs" in body
+    assert "/desk/users" in body
+
+
+def test_login_shows_name_under_account(client: TestClient) -> None:
+    client.post(
+        "/my-tekforce/login",
+        data={"email": "alex.rivera@example.com", "password": "sample"},
+    )
+    home = client.get("/")
+    assert home.status_code == 200
+    assert "Alex Rivera" in home.text
+    assert "account-name" in home.text
+    client.post("/my-tekforce/logout")
+    after = client.get("/")
+    assert 'class="account-name"' not in after.text
+
+
+def test_job_search_filters_public_board(client: TestClient) -> None:
+    response = client.get("/jobs", params={"q": "Python"})
+    assert "Senior Python SDET" in response.text
+    missing = client.get("/jobs", params={"q": "zzzz-no-such-role"})
+    assert "Senior Python SDET" not in missing.text
 
 
 def test_my_tekforce_login_page(client: TestClient) -> None:
     response = client.get("/my-tekforce/login")
     assert response.status_code == 200
     body = response.text
-    assert "Log in" in body
+    assert "Sign in" in body
     assert "alex.rivera@example.com" in body
-    assert "Register" in body
-    assert "Forgot password" in body
+    assert "Sign up now" in body
+    assert "Forgot your password" in body
+    assert "Sign in / Sign up with Google" in body
+    assert "Sign in / Sign up with Facebook" in body
+    assert "Sign in / Sign up with LinkedIn" in body
+    assert body.count("disabled") >= 3
+
+
+def test_production_hides_sample_logins(client: TestClient, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("DESKFLOW_ENV", "production")
+    response = client.get("/my-tekforce/login")
+    assert response.status_code == 200
+    assert "alex.rivera@example.com" not in response.text
+    assert "Sign in / Sign up with Google" in response.text
 
 
 def test_login_sample_candidate_sets_cookie(client: TestClient) -> None:
     response = client.post(
         "/my-tekforce/login",
-        data={"email": "alex.rivera@example.com", "password": "anything"},
+        data={"email": "alex.rivera@example.com", "password": "sample"},
         follow_redirects=False,
     )
     assert response.status_code == 303
@@ -112,14 +157,60 @@ def test_login_sample_candidate_sets_cookie(client: TestClient) -> None:
     assert response.cookies.get("tekforce_view") == "candidate"
 
 
-def test_unknown_email_stays_on_login(client: TestClient) -> None:
+def test_wrong_password_stays_on_login(client: TestClient) -> None:
     response = client.post(
         "/my-tekforce/login",
-        data={"email": "not-a-sample@example.com", "password": "x"},
+        data={"email": "alex.rivera@example.com", "password": "nope"},
         follow_redirects=True,
     )
     assert response.status_code == 200
-    assert "Use a sample account" in response.text
+    assert "wrong password" in response.text.lower()
+
+
+def test_unknown_email_stays_on_login(client: TestClient) -> None:
+    response = client.post(
+        "/my-tekforce/login",
+        data={"email": "not-a-sample@example.com", "password": "sample"},
+        follow_redirects=True,
+    )
+    assert response.status_code == 200
+    assert "Unknown email" in response.text
+
+
+def test_assign_roles_changes_primary_login(client: TestClient) -> None:
+    from deskflow.db.identity import list_users
+
+    client.post("/view", data={"as": "exec", "next": "/"})
+    page = client.get("/desk/users")
+    assert page.status_code == 200
+    assert "alex.rivera@example.com" in page.text
+
+    alex = next(user for user in list_users() if user["email"] == "alex.rivera@example.com")
+    saved = client.post(
+        f"/desk/users/{alex['id']}",
+        content=b"role=candidate&role=recruiter",
+        headers={"content-type": "application/x-www-form-urlencoded"},
+        follow_redirects=True,
+    )
+    assert saved.status_code == 200
+    assert "Updated roles" in saved.text
+
+    client.post("/my-tekforce/logout")
+    login = client.post(
+        "/my-tekforce/login",
+        data={"email": "alex.rivera@example.com", "password": "sample"},
+        follow_redirects=False,
+    )
+    assert login.cookies.get("tekforce_view") == "recruiter"
+
+
+def test_draft_survives_new_engine_connection(client: TestClient) -> None:
+    from deskflow.db.engine import reset_engine
+
+    store.draft_job("Keep Me", "IT", "Permanent", "x")
+    reset_engine()
+    assert any(job["title"] == "Keep Me" for job in store.jobs())
+    assert store.job_by_id("sdet") is not None
 
 
 def test_my_tekforce_hub_after_login(client: TestClient) -> None:

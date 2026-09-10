@@ -4,19 +4,79 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Tekforce{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/proto/static/proto.css">
 </head>
 <body class="persona-{{ persona }} {% block body_class %}{% endblock %}">
   <p class="proto-bar">Tekforce prototype · fictional people and companies · not a live ATS</p>
   <header class="site-header">
     <a class="wordmark" href="/">Tekforce</a>
-    <nav aria-label="Primary">
-      {% for label, href in nav %}
-      <a href="{{ href }}"{% if request.url.path == href %} aria-current="page"{% endif %}>{{ label }}</a>
-      {% endfor %}
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-drop">
+        <a class="nav-label" href="/jobs">Find a Job <span aria-hidden="true">▾</span></a>
+        <div class="nav-panel">
+          <a href="/jobs">Search jobs</a>
+          {% for name in verticals %}
+          <a href="/jobs?q={{ name|urlencode }}">{{ name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="nav-drop">
+        <a class="nav-label" href="/hire">Hire talent <span aria-hidden="true">▾</span></a>
+        <div class="nav-panel">
+          <a href="/hire">Post a role</a>
+          {% for name in placement_types %}
+          <span class="nav-note">{{ name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% if show_desk_nav %}
+      <div class="nav-drop">
+        <a class="nav-label" href="/desk/jobs">Desk <span aria-hidden="true">▾</span></a>
+        <div class="nav-panel">
+          <a href="/desk/approve">Approve</a>
+          <a href="/desk/jobs">Desk jobs</a>
+          {% if can_assign_roles %}
+          <a href="/desk/users">Users</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      {% if persona == "candidate" %}
+      <a class="nav-label" href="/applications">My applications</a>
+      {% elif persona == "client" %}
+      <a class="nav-label" href="/me/jobs">My jobs</a>
+      {% endif %}
     </nav>
     <div class="header-end">
-      <a class="my-tekforce{% if request.url.path.startswith('/my-tekforce') %} is-current{% endif %}" href="{{ my_tekforce_href }}">My Tekforce</a>
+      <div class="nav-drop account">
+        <a class="account-toggle" href="{{ my_tekforce_href }}">
+          <svg class="account-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+            <path d="M5 19c1.5-3.2 4-5 7-5s5.5 1.8 7 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+          <span class="account-copy">
+            <span class="account-label">My Tekforce</span>
+            {% if signed_in_name %}
+            <span class="account-name">{{ signed_in_name }}</span>
+            {% endif %}
+          </span>
+        </a>
+        <div class="nav-panel account-panel">
+          {% if signed_in_name %}
+          <a href="{{ my_tekforce_href }}">Account hub</a>
+          <a href="{{ signed_in_home }}">Continue</a>
+          <form method="post" action="/my-tekforce/logout">
+            <button type="submit">Sign out</button>
+          </form>
+          {% else %}
+          <a href="/my-tekforce/login">Sign in</a>
+          <a href="/my-tekforce/register">Sign up</a>
+          {% endif %}
+        </div>
+      </div>
       <form class="view-as" action="/view" method="post">
         <input type="hidden" name="next" value="{{ request.url.path }}">
         <label>
@@ -40,7 +100,23 @@
   </main>
 
   <footer class="site-footer">
-    <p>Tekforce LLC · sample walkthrough · desktop first, mobile later</p>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Tekforce</p>
+        <p>Recruiting and staff augmentation. Sample walkthrough.</p>
+      </div>
+      <div>
+        <p class="footer-head">For talent</p>
+        <a href="/jobs">Find a job</a>
+        <a href="/my-tekforce/login">My Tekforce</a>
+      </div>
+      <div>
+        <p class="footer-head">For clients</p>
+        <a href="/hire">Hire talent</a>
+        <a href="/me/jobs">My jobs</a>
+      </div>
+    </div>
+    <p class="footer-note">Tekforce LLC · desktop first, mobile later</p>
   </footer>
 </body>
 </html>

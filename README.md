@@ -68,6 +68,7 @@ Layout:
 | `docs/aws-deploy.md` | App Runner from ECR |
 | `docs/playbook.md` | How this repo is built with agents |
 | `src/deskflow/proto/` | Clickable Tekforce HTML prototype (`GET /`) |
+| `src/deskflow/db/` | SQLite (portable SQLAlchemy): users, roles, catalog, jobs |
 | `docs/wiki/` | **Product wiki:** Tekforce brief, competitor ideas, architecture, tools evaluation |
 | `AGENTS.md` | What an agent may and may not do here |
 
@@ -89,7 +90,9 @@ pip install -e ".[dev]"
 uvicorn deskflow.app:app --reload --port 8080
 ```
 
-Open the clickable Tekforce prototype: [http://127.0.0.1:8080/](http://127.0.0.1:8080/) (sample data, View as, My Tekforce login).
+Open the clickable Tekforce prototype: [http://127.0.0.1:8080/](http://127.0.0.1:8080/) (sample data, View as, My Tekforce). Demo password is `sample`. Jobs and users persist in `data/deskflow.sqlite`. Sample-account buttons on login show when `DESKFLOW_ENV` is `dev` or `test` (default `dev`).
+
+On a **fresh Postgres**, create tables with `alembic upgrade head` then start the app (it seeds sample users if the `roles` table is empty). Local SQLite is created on first start.
 
 Health check: `GET http://127.0.0.1:8080/health`
 

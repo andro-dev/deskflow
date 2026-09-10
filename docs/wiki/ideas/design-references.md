@@ -1,50 +1,62 @@
 ---
-updated: 2026-09-09
+updated: 2026-09-10
 ---
 
 # Design references
 
 Visual language for the [frontend prototype](../frontend-prototype.md). Not staffing competitors (those stay under [ideas/](README.md)). Status: **v1** (steal this) · **watch** · **later** · **never**.
 
+## Motion Recruitment — [motionrecruitment.com](https://motionrecruitment.com/)
+
+**v1 (public chrome + home + login door)**
+
+* Dark slate header, **Work Sans**, green filled CTAs, orange hairline under the hero
+* Dropdown menus: Find a Job, Hire talent, Desk (staff)
+* Account icon: Sign in / Sign up; signed-in name under My Tekforce
+* Home: full-bleed dark hero, two doors, search-jobs card, practice areas
+* Login/register: same type and green Sign in; sample accounts in Dev/Test; social buttons visible and inactive
+
+**never:** their wordmark or Kelly lockup; their photography; chatbot; Bullhorn contractor portal; fake NPS stats.
+
 ## Apple — [apple.com](https://www.apple.com/)
 
-**v1 (public + desk type)**
+**watch** (earlier prototype look)
 
-* Thin nav, huge type, lots of white, almost no chrome
-* One idea per section; few buttons
-* Inner pages stay quiet (job, apply, approve, slate)
+* Thin nav, huge type, lots of white
 
-**never:** product photography we do not have; copying the Apple bar or wordmark.
+**never:** copying the Apple bar or wordmark.
 
 ## Toptal — [toptal.com](https://www.toptal.com/)
 
-**v1 (motion only)**
+**watch** (two-door motion only)
 
-* Two-sided market: hire talent vs join as talent
-* Hero with a clear primary CTA; specialties / practice areas as a row
-* Social-proof *structure* (trusted-by, talent cards) only if we use **fiction**
+* Hire talent vs find work as two CTAs
+* Practice areas as a row
 
-**never:** “Top 3%” or equivalent claim; their green CTA as a brand clone; their layout pixel-for-pixel.
+**never:** “Top 3%” or equivalent claim; their green as a brand clone.
 
 ## Tesla — [tesla.com](https://www.tesla.com/)
 
 **watch** (looked at 2026-09-09; not this prototype’s home)
 
-* Full-height panels, centered name, **two CTAs** (filled Order / outline Learn), next section peeks
-* Maps cleanly to Hire talent / Find work, but needs cinematic imagery we do not have
-* Desk screens would get worse if every page were a product panel
+* Full-height panels, two CTAs
 
-Revisit if we want a louder marketing home **after** the clickable loop exists.
+## Manpower — login / create-account card
+
+**watch** (looked at; login layout is now Motion-styled)
+
+* Email/password, keep me signed in, forgot, Sign up, inactive social still on our login page
+
+**never:** their orange logo or wordmark; a real captcha; email verification codes.
 
 ## Randstad USA — [my-randstad/login](https://www.randstadusa.com/my-randstad/login/)
 
-**v1 (portal door only)**
+**watch** (looked at; not the login chrome)
 
-* Header link **My Tekforce** (their “my randstad”)
-* Dedicated log-in page with breadcrumb, email/password, remember me, register, forgot password
+* Header door name **My Tekforce**
 * After sign-in, a small hub into applications / jobs / desk
 
-**never:** their blue marketing chrome; Facebook/Google continue; captcha; a real password store.
+**never:** their blue marketing banner as the login page; a real password-reset engine.
 
 ## Robert Half
 

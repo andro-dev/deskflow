@@ -1,22 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Forgot password · My Tekforce{% endblock %}
-{% block body_class %}page-account{% endblock %}
+{% block body_class %}page-auth{% endblock %}
 {% block main %}
-<nav class="crumbs" aria-label="Breadcrumb">
-  <a href="/">Home</a>
-  <span aria-hidden="true">/</span>
-  <a href="/my-tekforce/login">My Tekforce</a>
-  <span aria-hidden="true">/</span>
-  <span>Forgot password</span>
-</nav>
-
-<header class="page-head">
-  <p class="eyebrow">My Tekforce</p>
-  <h1>Forgot password</h1>
-  <p class="lede">Not in this prototype. Use a sample account on the login page — the password field is ignored.</p>
-</header>
-
-<p class="actions">
-  <a class="door door-primary" href="/my-tekforce/login">Back to log in</a>
-</p>
+<section class="auth-card" aria-labelledby="auth-title">
+  <a class="auth-close" href="/my-tekforce/login" aria-label="Close">×</a>
+  <a class="auth-brand" href="/">Tekforce</a>
+  <h1 id="auth-title">Forgot password</h1>
+  <p class="auth-copy">Not in this prototype. Use a sample account on the login page. Demo password is “sample”.</p>
+  <a class="door door-primary auth-submit" href="/my-tekforce/login">Back to log in</a>
+</section>
 {% endblock %}

@@ -7,11 +7,24 @@ from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
+from deskflow.config import get_settings
 from deskflow.proto import store
+from deskflow.db.identity import (
+    authenticate,
+    list_role_rows,
+    list_users,
+    register_user,
+    set_user_roles,
+    user_by_id,
+)
+from deskflow.db.passwords import DEMO_PASSWORD
+from deskflow.db.seed import sample_accounts
 
 HERE = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(HERE / "templates"))
 VIEW_COOKIE = "tekforce_view"
+USER_COOKIE = "tekforce_user"
+STAFF_ROLES = frozenset({"recruiter", "exec", "admin"})
 
 router = APIRouter(tags=["prototype"])
 
@@ -21,8 +34,16 @@ def _persona(request: Request) -> str:
     return raw if raw in store.ROLES else "visitor"
 
 
+def _signed_in_user(request: Request) -> dict | None:
+    raw = request.cookies.get(USER_COOKIE, "")
+    if not raw:
+        return None
+    return user_by_id(raw)
+
+
 def _ctx(request: Request, **extra: object) -> dict[str, object]:
     persona = _persona(request)
+    account = _signed_in_user(request)
     return {
         "request": request,
         "persona": persona,
@@ -30,6 +51,13 @@ def _ctx(request: Request, **extra: object) -> dict[str, object]:
         "roles": store.ROLES,
         "my_tekforce_href": store.my_tekforce_href(persona),
         "notice": request.query_params.get("notice"),
+        "show_sample_logins": get_settings().show_sample_logins(),
+        "signed_in_name": account["name"] if account else "",
+        "verticals": store.VERTICALS(),
+        "placement_types": store.PLACEMENT_TYPES(),
+        "show_desk_nav": persona in STAFF_ROLES,
+        "can_assign_roles": persona in {"exec", "admin"},
+        "signed_in_home": store.HOME_AFTER_LOGIN.get(persona, "/"),
         **extra,
     }
 
@@ -73,7 +101,8 @@ def my_tekforce(request: Request) -> HTMLResponse | RedirectResponse:
 def login_form(request: Request) -> HTMLResponse | RedirectResponse:
     if _persona(request) != "visitor":
         return _go("/my-tekforce")
-    return _page(request, "login.html", accounts=store.SAMPLE_ACCOUNTS)
+    accounts = sample_accounts() if get_settings().show_sample_logins() else []
+    return _page(request, "login.html", accounts=accounts)
 
 
 @router.post("/my-tekforce/login")
@@ -82,12 +111,13 @@ def login_submit(
     password: str = Form(""),
     remember: str = Form(""),
 ) -> RedirectResponse:
-    del password, remember
-    account = store.account_for_email(email)
+    del remember
+    account = authenticate(email, password)
     if account is None:
-        return _go("/my-tekforce/login", "Use a sample account from the list. Nothing is verified.")
+        return _go("/my-tekforce/login", "Unknown email or wrong password. Demo password is “sample”.")
     response = _go(_signed_in_home(account["role"]), f"Signed in as {account['name']} · sample only.")
     response.set_cookie(VIEW_COOKIE, account["role"], httponly=False, samesite="lax")
+    response.set_cookie(USER_COOKIE, account["id"], httponly=False, samesite="lax")
     return response
 
 
@@ -97,10 +127,22 @@ def register_form(request: Request) -> HTMLResponse:
 
 
 @router.post("/my-tekforce/register")
-def register_submit(role: str = Form("candidate")) -> RedirectResponse:
+def register_submit(
+    role: str = Form("candidate"),
+    email: str = Form(""),
+    first_name: str = Form(""),
+    last_name: str = Form(""),
+    name: str = Form(""),
+    password: str = Form(DEMO_PASSWORD),
+) -> RedirectResponse:
     persona = role if role in ("candidate", "client") else "candidate"
-    response = _go(_signed_in_home(persona), "Registered in the prototype. No account was created.")
+    full_name = " ".join(part for part in (first_name.strip(), last_name.strip()) if part) or name.strip()
+    created = register_user(email, full_name, persona, password or DEMO_PASSWORD)
+    if created is None:
+        return _go("/my-tekforce/register", "That email is already registered or the role is invalid.")
+    response = _go(_signed_in_home(persona), "Registered in the prototype. Sample data only.")
     response.set_cookie(VIEW_COOKIE, persona, httponly=False, samesite="lax")
+    response.set_cookie(USER_COOKIE, created["id"], httponly=False, samesite="lax")
     return response
 
 
@@ -113,17 +155,18 @@ def forgot_password(request: Request) -> HTMLResponse:
 def logout() -> RedirectResponse:
     response = _go("/", "Signed out of My Tekforce.")
     response.set_cookie(VIEW_COOKIE, "visitor", httponly=False, samesite="lax")
+    response.delete_cookie(USER_COOKIE)
     return response
 
 
 @router.get("/", response_class=HTMLResponse)
 def home(request: Request) -> HTMLResponse:
-    return _page(request, "home.html", verticals=store.VERTICALS)
+    return _page(request, "home.html", verticals=store.VERTICALS())
 
 
 @router.get("/jobs", response_class=HTMLResponse)
-def job_board(request: Request) -> HTMLResponse:
-    return _page(request, "jobs.html", jobs=store.public_jobs())
+def job_board(request: Request, q: str = "") -> HTMLResponse:
+    return _page(request, "jobs.html", jobs=store.public_jobs(q), job_query=q)
 
 
 @router.get("/jobs/{job_id}", response_class=HTMLResponse)
@@ -164,8 +207,8 @@ def hire_form(request: Request) -> HTMLResponse:
     return _page(
         request,
         "hire.html",
-        verticals=store.VERTICALS,
-        placement_types=store.PLACEMENT_TYPES,
+        verticals=store.VERTICALS(),
+        placement_types=store.PLACEMENT_TYPES(),
     )
 
 
@@ -243,3 +286,31 @@ def client_job(request: Request, job_id: str) -> HTMLResponse:
         job=job,
         slate=store.slate_for(job_id),
     )
+
+
+def _can_assign_roles(persona: str) -> bool:
+    return persona in {"exec", "admin"}
+
+
+@router.get("/desk/users", response_model=None)
+def desk_users(request: Request) -> HTMLResponse | RedirectResponse:
+    if not _can_assign_roles(_persona(request)):
+        return _go("/", "View as Exec or Admin to assign roles.")
+    return _page(
+        request,
+        "users.html",
+        users=list_users(),
+        role_rows=list_role_rows(),
+    )
+
+
+@router.post("/desk/users/{user_id}")
+async def desk_users_assign(request: Request, user_id: str) -> RedirectResponse:
+    if not _can_assign_roles(_persona(request)):
+        return _go("/", "View as Exec or Admin to assign roles.")
+    form = await request.form()
+    codes = [str(value) for value in form.getlist("role")]
+    updated = set_user_roles(user_id, codes)
+    if updated is None:
+        return _go("/desk/users", "No such user.")
+    return _go("/desk/users", f"Updated roles for {updated['email']}.")

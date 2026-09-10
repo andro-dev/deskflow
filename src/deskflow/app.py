@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from contextlib import asynccontextmanager
 from pathlib import Path
+from typing import AsyncIterator
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
@@ -8,11 +10,19 @@ from fastapi.staticfiles import StaticFiles
 
 from deskflow import __version__
 from deskflow.config import get_settings
+from deskflow.db.engine import init_db
 from deskflow.models import EvaluateRequest, EvaluateResponse, HealthResponse
 from deskflow.pipeline import evaluate
 from deskflow.proto.router import router as proto_router
 
 SAMPLES_DIR = Path(__file__).resolve().parents[2] / "samples"
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    init_db()
+    yield
+
 
 app = FastAPI(
     title="Deskflow",
@@ -23,6 +33,7 @@ app = FastAPI(
         "Do not submit real resumes, personal data, or employer contacts. "
         "GET / is a clickable Tekforce prototype (sample data only)."
     ),
+    lifespan=lifespan,
 )
 
 app.include_router(proto_router)

@@ -9,7 +9,7 @@ We are **not** cloning these products. We write down what they do so Tekforce ca
 | FDM Group | Train talent, then deploy to clients | [fdm-group.md](fdm-group.md) |
 | Bullhorn | The ATS+CRM category (build our own, don’t buy first) | [bullhorn.md](bullhorn.md) |
 | Michael Page | Perm / temp / exec / scaled hiring | [michael-page.md](michael-page.md) |
-| Apple / Toptal / Tesla / Randstad | Visual + My Tekforce login door | [design-references.md](design-references.md) |
+| Apple / Toptal / Tesla / Motion / Manpower / Randstad | Visual + My Tekforce login door | [design-references.md](design-references.md) |
 
 Status key: **v1** (we are building it) · **later** · **watch** · **never**.
 

@@ -39,7 +39,7 @@ That split is intentional. It is testable, it works offline, and it is the answe
 | Pushing to origin or skipping hooks | Humans decide when history leaves the machine. |
 | A fake AWS URL | If credentials are missing, document App Runner steps; do not invent a hostname. |
 | Unbounded LLM scoring | A demo that needs a paid key is not an MVP. |
-| Real ATS/CRM (login, Postgres) or Kubernetes / a second language | Clickable HTML lives in `src/deskflow/proto/`. Do not grow it into the full desk unless a human asks. |
+| Real ATS/CRM (OAuth, Postgres, Kubernetes) or a second language | SQLite identity and the HTML loop live in `src/deskflow/db/` and `src/deskflow/proto/`. Do not grow them into the full desk unless a human asks. |
 | Deleting or weakening tests to go green | The SDET artifact is `tests/test_api.py`. Protect it. |
 | Committing `.env` or cloud keys | Local Docker and pytest must work without secrets. |
 

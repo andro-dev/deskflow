@@ -6,6 +6,10 @@
   <h1>Find work</h1>
   <p class="lede">Public board. Sample roles only.</p>
 </header>
+<form class="job-search" method="get" action="/jobs">
+  <input type="search" name="q" value="{{ job_query or '' }}" placeholder="Search title, skill, or practice area" aria-label="Search jobs">
+  <button class="door door-primary" type="submit">Search</button>
+</form>
 {% if jobs %}
 <ul class="job-list">
   {% for job in jobs %}
@@ -19,6 +23,6 @@
   {% endfor %}
 </ul>
 {% else %}
-<p class="empty">Nothing public yet. Approve a client draft first.</p>
+<p class="empty">{% if job_query %}No public roles match that search.{% else %}Nothing public yet. Approve a client draft first.{% endif %}</p>
 {% endif %}
 {% endblock %}
