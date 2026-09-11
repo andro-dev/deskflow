@@ -10,6 +10,7 @@ We are **not** cloning these products. We write down what they do so Tekforce ca
 | Bullhorn | The ATS+CRM category (build our own, don’t buy first) | [bullhorn.md](bullhorn.md) |
 | Michael Page | Perm / temp / exec / scaled hiring | [michael-page.md](michael-page.md) |
 | Apple / Toptal / Tesla / Motion / Manpower / Randstad | Visual + My Tekforce login door | [design-references.md](design-references.md) |
+| Portfolio blueprint | AI-assisted candidate matcher & ingestion engine | [misc/](misc/) |
 
 Status key: **v1** (we are building it) · **later** · **watch** · **never**.
 
