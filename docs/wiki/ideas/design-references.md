@@ -36,6 +36,8 @@ Visual language for the [frontend prototype](../frontend-prototype.md). Not staf
 
 **never:** “Top 3%” or equivalent claim; their green as a brand clone.
 
+Product cousin (vetted remote marketplace, not chrome): [Arc (arc.dev)](arc-dev.md).
+
 ## Tesla — [tesla.com](https://www.tesla.com/)
 
 **watch** (looked at 2026-09-09; not this prototype’s home)

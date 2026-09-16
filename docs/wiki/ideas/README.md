@@ -10,6 +10,7 @@ We are **not** cloning these products. We write down what they do so Tekforce ca
 | Bullhorn | The ATS+CRM category (build our own, don’t buy first) | [bullhorn.md](bullhorn.md) |
 | Michael Page | Perm / temp / exec / scaled hiring | [michael-page.md](michael-page.md) |
 | ARCG | Multi-line staffing + hourly match-as-a-service | [arcg.md](arcg.md) |
+| Arc (arc.dev) | Vetted remote marketplace (freelance + perm + EOR partners) | [arc-dev.md](arc-dev.md) |
 | JobDiva | Front-to-back ATS+CRM (Bullhorn peer; born at Axelon) | [jobdiva.md](jobdiva.md) |
 | Axelon | Staffing firm that built JobDiva, then ran on it | [axelon.md](axelon.md) |
 | Apple / Toptal / Tesla / Motion / Manpower / Randstad | Visual + My Tekforce login door | [design-references.md](design-references.md) |

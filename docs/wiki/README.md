@@ -53,6 +53,7 @@ Track what they do, what we might adopt, and what we will not copy. Status on ea
 * [Bullhorn](ideas/bullhorn.md) — staffing ATS + CRM (+ middle office later)
 * [Michael Page](ideas/michael-page.md) — perm / temp / executive / RPO-scale
 * [ARCG](ideas/arcg.md) — multi-line staffing + hourly Recruitment Intelligence
+* [Arc (arc.dev)](ideas/arc-dev.md) — vetted remote marketplace (not ARCG)
 * [JobDiva](ideas/jobdiva.md) — front-to-back staffing ATS + CRM (Bullhorn peer)
 * [Axelon](ideas/axelon.md) — operating firm that built JobDiva, then ran on it
 * [Design references](ideas/design-references.md) — Motion Recruitment public chrome; Tesla watched

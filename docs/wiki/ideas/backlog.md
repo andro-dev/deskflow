@@ -17,7 +17,8 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 ## later
 
 * Recruit vs Employ information architecture (RemotePeople)
-* EOR / COR / payroll / PEO (RemotePeople, Axelon)
+* EOR / COR / payroll / PEO (RemotePeople, Axelon; Arc.dev via EOR partners)
+* Contractor payments / escrow and trial / replacement terms (Arc.dev, JobDiva DivaFinancials)
 * Train-then-deploy bench (FDM); IT project teams (ARCG)
 * Email/calendar, job boards, background checks
 * Timesheets, invoices, contractor pay (JobDiva DivaFinancials)
@@ -33,6 +34,8 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 ## watch
 
 * RemotePeople “shortlist in 72 hours” as an operating SLA
+* Arc.dev 72h freelance / 14d perm SLA, and pre-vet (comms + skills) as named ATS stages before submit
+* Marketplace-style “client meets the shortlist” after match (v1 stays recruiter-mediated)
 * FDM Careers vs Clients site split
 * Tesla-style full-bleed homepage (cinematic panels) — watched; not this prototype
 * ARCG 7-stage pipeline (including debrief + counter-offer) as default ATS stages
@@ -48,3 +51,4 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 * Job-board login harvesting / ToS-violating scrape (old JobDiva FAQ pattern)
 * Unbounded AI scoring (ARCG RiC marketing)
 * Claiming a candidate database size we do not have
+* “Top 2%” / Toptal-style gated-network slogan (Arc.dev)

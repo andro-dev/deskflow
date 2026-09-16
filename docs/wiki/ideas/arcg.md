@@ -7,6 +7,8 @@ updated: 2026-09-16
 
 Staffing and consulting brand: **find a job / find talent**, plus an hourly research product (Recruitment Intelligence™) and IT project delivery. Closer to a multi-line Robert Half than to a software vendor.
 
+Not [Arc (arc.dev)](arc-dev.md), the remote talent marketplace.
+
 ## Business model
 
 Four public service lines:
