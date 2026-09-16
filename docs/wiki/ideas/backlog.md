@@ -17,11 +17,14 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 ## later
 
 * Recruit vs Employ information architecture (RemotePeople)
-* EOR / COR / payroll / PEO
-* Train-then-deploy bench (FDM)
+* EOR / COR / payroll / PEO (RemotePeople, Axelon)
+* Train-then-deploy bench (FDM); IT project teams (ARCG)
 * Email/calendar, job boards, background checks
-* Timesheets, invoices, contractor pay
-* Executive interim, assessment, RPO/MSP
+* Timesheets, invoices, contractor pay (JobDiva DivaFinancials)
+* Executive interim, assessment, RPO/MSP (Michael Page, Axelon, JobDiva VMS)
+* Hourly research / client-owned match report (ARCG Recruitment Intelligence)
+* Recruiter on demand (Axelon)
+* White-label candidate app + job alerts (JobDiva / Axelon portal)
 * Salary/content marketing
 * Multi-tenant if we ever sell the software
 * **Mobile / responsive** layouts for the public site and portals
@@ -32,9 +35,16 @@ Roll-up. Detail lives on the company pages. Change status here when we decide.
 * RemotePeople “shortlist in 72 hours” as an operating SLA
 * FDM Careers vs Clients site split
 * Tesla-style full-bleed homepage (cinematic panels) — watched; not this prototype
+* ARCG 7-stage pipeline (including debrief + counter-offer) as default ATS stages
+* Axelon job cards (duration / shift / rate) on the public board
+* KPI fields on the client account at kickoff (Axelon)
+* Operate-then-productize the desk (Axelon → JobDiva path)
 
 ## never (unless strategy changes)
 
 * Pixel-clone of any of these sites
 * Claiming a global office network we do not have
 * Sending Tekforce CRM/ATS data to a public chatbot
+* Job-board login harvesting / ToS-violating scrape (old JobDiva FAQ pattern)
+* Unbounded AI scoring (ARCG RiC marketing)
+* Claiming a candidate database size we do not have

@@ -9,6 +9,9 @@ We are **not** cloning these products. We write down what they do so Tekforce ca
 | FDM Group | Train talent, then deploy to clients | [fdm-group.md](fdm-group.md) |
 | Bullhorn | The ATS+CRM category (build our own, don’t buy first) | [bullhorn.md](bullhorn.md) |
 | Michael Page | Perm / temp / exec / scaled hiring | [michael-page.md](michael-page.md) |
+| ARCG | Multi-line staffing + hourly match-as-a-service | [arcg.md](arcg.md) |
+| JobDiva | Front-to-back ATS+CRM (Bullhorn peer; born at Axelon) | [jobdiva.md](jobdiva.md) |
+| Axelon | Staffing firm that built JobDiva, then ran on it | [axelon.md](axelon.md) |
 | Apple / Toptal / Tesla / Motion / Manpower / Randstad | Visual + My Tekforce login door | [design-references.md](design-references.md) |
 | Portfolio blueprint | AI-assisted candidate matcher & ingestion engine | [misc/](misc/) |
 

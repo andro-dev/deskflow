@@ -5,7 +5,7 @@ updated: 2026-09-09
 
 # Bullhorn
 
-The category product: **ATS + CRM in one system** for staffing agencies, plus automation, search/match, and (in some markets) middle/back office (pay workers, onboarding). We are **building our own desk**, not integrating Bullhorn in v1.
+The category product: **ATS + CRM in one system** for staffing agencies, plus automation, search/match, and (in some markets) middle/back office (pay workers, onboarding). Peer stack: [JobDiva](jobdiva.md) (born at [Axelon](axelon.md)). We are **building our own desk**, not integrating Bullhorn or JobDiva in v1.
 
 ## What they do
 
